@@ -24,7 +24,7 @@ exports.postBrewing = function(user_name, user_id) {
 }
 
 postFinished = function(user_name) {
-  var text = ':coffee: Coffee is ready. Thanks @' + user_name + ' for brewing it. :coffeemug:'
+  var text = ':coffee: Coffee is ready. Thanks ' + user_name + ' for brewing it. :coffeemug:'
   slack.chat.postMessage({ token:SlackApiToken, channel:coffee_channel, text:text}, function(err, data) {
     console.log(data);
   });
