@@ -7,7 +7,7 @@ var SlackApiToken = process.env.SLACKKEY
 var coffee_channel = process.env.COFFEECHANNEL
 
 //for testing slackbottest channel
-var coffee_channel = process.env.TESTINGCHANNEL
+var testing_channel = process.env.TESTINGCHANNEL
 
 exports.getJson = function() {
   return Q.Promise(function(resolve) {

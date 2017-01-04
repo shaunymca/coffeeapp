@@ -6,7 +6,7 @@ var SlackApiToken = process.env.SLACKKEY
 var coffee_channel = process.env.COFFEECHANNEL
 
 //for testing slackbottest channel
-var coffee_channel = process.env.TESTINGCHANNEL
+var testing_channel = process.env.TESTINGCHANNEL
 
 exports.postBrewing = function(user_name, user_id) {
   var botname = 'Coffee Bot'
