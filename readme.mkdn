@@ -17,4 +17,5 @@ TESTINGCHANNEL=<a public channel id for testing>
 An easy way to find the channel identifiers is to use [this page](https://api.slack.com/methods/channels.list/test) and search for the channel names and copy the identifiers. 
 
 Run the server with 'node server.js'.
+
 And finally either build an [Android](https://jasonette.github.io/documentation/android/) or [IOS](https://jasonette.github.io/documentation/ios/) app (following the directions here), or point the relevant Jason app ([ios](https://itunes.apple.com/us/app/jason./id1095557868?mt=8_), [android](https://play.google.com/store/apps/details?id=com.jasonette.seed)) at `localhost:3000/jsonette.json`
