@@ -51,14 +51,14 @@ app.get('/node_modules/*', function(req, res) {
 });
 
 app.get('/jsonette.json', function(req, res) {
+  console.log("new user");
   jsonette.getJson()
   .then(function(result){ 
     res.json(result);
   });
 });
 
-app.post('/submit', function(req, res) {
-  //console.log(req);
+app.post('/submit.json', function(req, res) {
   console.log(req.body.user_name);
   slackPost.postBrewing(req.body.user_name, req.body.user_id);
   res.json("success");

@@ -91,8 +91,9 @@ writeJson = function(members) {
             "sections": [
               {
                 "items": {
+                  
                   "{{#each members}}": {
-                    "type": "horizontal",
+                    "type": "vertical",
                     "style": {
                       "spacing": "10"
                     },
@@ -112,7 +113,7 @@ writeJson = function(members) {
                             }
                           },
                         {
-                          "type": "image",
+                          "type": "button",
                           "url": "{{profile.image_192}}",
                           "style": {
                             "width": "100%",
@@ -121,7 +122,7 @@ writeJson = function(members) {
                           "action": {
                             "type": "$network.request",
                             "options": {
-                              "url": "https://stitchcoffeebot.herokuapp.com/submit",
+                              "url": "http://172.16.16.135:3000/submit.json",
                               "method": "POST",
                               "data": {
                                 "user_name": "{{name}}",
