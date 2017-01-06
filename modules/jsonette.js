@@ -122,7 +122,7 @@ writeJson = function(members) {
                           "action": {
                             "type": "$network.request",
                             "options": {
-                              "url": "http://172.16.16.135:3000/submit.json",
+                              "url": "https://stitchcoffeebot.herokuapp.com/submit.json",
                               "method": "POST",
                               "data": {
                                 "user_name": "{{name}}",
