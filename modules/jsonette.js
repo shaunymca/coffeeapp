@@ -23,8 +23,6 @@ exports.getJson = function() {
   })
 }
 
-
-
 getChannelInfo = function() {
   return Q.Promise(function(resolve) {
     members = [];
@@ -93,30 +91,51 @@ writeJson = function(members) {
                 "items": {
                   
                   "{{#each members}}": {
-                    "type": "vertical",
+                    "type": "horizontal",
                     "style": {
                       "spacing": "10"
                     },
                     "components": [
                       {
-                        "type": "vertical",
+                        "type": "horizontal",
                         "style": {
                           "spacing": "5"
                         },
                         "components": [
                           {
-                            "type": "label",
+                            "type": "button",
                             "text": "{{real_name}}",
                             "style": {
+                              "width": "150",
+                              "height": "150",
                               "font": "HelveticaNeue",
-                              "size": "14"
+                              "size": "20",
+                              "corner_radius": "25"
+                            },
+                            "action": {
+                              "type": "$network.request",
+                              "options": {
+                                "url": "https://stitchcoffeebot.herokuapp.com/submit.json",
+                                "method": "POST",
+                                "data": {
+                                  "user_name": "{{name}}",
+                                  "user_id":"{{id}}"
+                                }
+                              },
+                              "success": {
+                                "type": "$util.toast",
+                                "options": {
+                                    "text": "Thanks {{profile.first_name}}! Watch the #coffee channel for when it's ready.",
+                                    "type": "success"
+                                }
+                              }
                             }
                           },
                         {
                           "type": "button",
                           "url": "{{profile.image_192}}",
                           "style": {
-                            "width": "100%",
+                            "height": "20%",
                             "corner_radius": "5"
                           },
                           "action": {
