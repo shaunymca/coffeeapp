@@ -9,14 +9,14 @@ var coffee_channel = process.env.COFFEECHANNEL
 //for testing slackbottest channel
 var testing_channel = process.env.TESTINGCHANNEL
 
-exports.getJson = function() {
+exports.getJson = function(root_url) {
   return Q.Promise(function(resolve) {
     getChannelInfo()
     .then(function (result) {
       getmemberInfo(result)
         .then(function(members){
           members = filterMembers(members);
-          var returnJson = writeJson(members);
+          var returnJson = writeJson(members, root_url);
           resolve(returnJson);
       });
     });
@@ -56,24 +56,14 @@ getmemberInfo = function(members) {
   });
 };
 
-writeJson = function(members) {
+writeJson = function(members, root_url) {
   var jsonout = {
     "$jason": {
       "head": {
         "title": "Coffee Time",
-        "styles": {
-          "note": {
-            "color": "#ffffff",
-            "font": "HelveticaNeue-Bold",
-            "size": "15"
-          }
-        },
         "actions": {
           "$pull": {
-            "type": "$flush",
-            "success": {
-              "type": "$reload"
-            }
+            "type": "$reload"
           }
         },
         "data": {
@@ -88,76 +78,55 @@ writeJson = function(members) {
             },
             "sections": [
               {
+                "header": {
+                  "type": "label",
+                  "text": "Tap if you're brewing",
+                  "style": {
+                    "font": "HelveticaNeue-Bold",
+                    "size": "12"
+                  }
+                },
                 "items": {
-                  
                   "{{#each members}}": {
                     "type": "horizontal",
                     "style": {
-                      "spacing": "10"
+                      "spacing": "10",
+                      "align": "center"
+                    },
+                    "action": {
+                      "type": "$network.request",
+                      "options": {
+                        "url": root_url + "/submit.json",
+                        "method": "POST",
+                        "data": {
+                          "user_name": "{{name}}",
+                          "user_id":"{{id}}"
+                        }
+                      },
+                      "success": {
+                        "type": "$util.toast",
+                        "options": {
+                            "text": "Thanks {{profile.first_name}}! Watch the #coffee channel for when it's ready.",
+                            "type": "success"
+                        }
+                      }
                     },
                     "components": [
                       {
-                        "type": "horizontal",
+                        "type": "image",
+                        "url": "{{profile.image_192}}",
                         "style": {
-                          "spacing": "5"
-                        },
-                        "components": [
-                          {
-                            "type": "button",
-                            "text": "{{real_name}}",
-                            "style": {
-                              "width": "150",
-                              "height": "150",
-                              "font": "HelveticaNeue",
-                              "size": "20",
-                              "corner_radius": "25"
-                            },
-                            "action": {
-                              "type": "$network.request",
-                              "options": {
-                                "url": "https://stitchcoffeebot.herokuapp.com/submit.json",
-                                "method": "POST",
-                                "data": {
-                                  "user_name": "{{name}}",
-                                  "user_id":"{{id}}"
-                                }
-                              },
-                              "success": {
-                                "type": "$util.toast",
-                                "options": {
-                                    "text": "Thanks {{profile.first_name}}! Watch the #coffee channel for when it's ready.",
-                                    "type": "success"
-                                }
-                              }
-                            }
-                          },
-                        {
-                          "type": "button",
-                          "url": "{{profile.image_192}}",
-                          "style": {
-                            "height": "20%",
-                            "corner_radius": "5"
-                          },
-                          "action": {
-                            "type": "$network.request",
-                            "options": {
-                              "url": "https://stitchcoffeebot.herokuapp.com/submit.json",
-                              "method": "POST",
-                              "data": {
-                                "user_name": "{{name}}",
-                                "user_id":"{{id}}"
-                              }
-                            },
-                            "success": {
-                              "type": "$util.toast",
-                              "options": {
-                                  "text": "Thanks {{profile.first_name}}! Watch the #coffee channel for when it's ready.",
-                                  "type": "success"
-                              }
-                            }
-                          }
+                          "height": "80",
+                          "corner_radius": "5"
                         }
-                        ]
+                      },
+                      {
+                        "type": "label",
+                        "text": "{{real_name}}",
+                        "style": {
+                          "font": "HelveticaNeue-Bold",
+                          "size": "20"
+                        }
                       }
                     ]
                   }

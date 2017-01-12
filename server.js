@@ -52,7 +52,8 @@ app.get('/node_modules/*', function(req, res) {
 
 app.get('/jsonette.json', function(req, res) {
   console.log("new user");
-  jsonette.getJson()
+  var root_url = req.protocol + '://' + req.get('host'); 
+  jsonette.getJson(root_url)
   .then(function(result){ 
     res.json(result);
   });
