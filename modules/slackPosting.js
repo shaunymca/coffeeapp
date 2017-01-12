@@ -16,7 +16,7 @@ exports.postBrewing = function(user_name, user_id) {
   var text = user_mention + ' just started brewing a pot :coffee:'
   slack.chat.postMessage({ token:SlackApiToken, channel:coffee_channel, text:text, icon_emoji:icon_emoji, username:botname}, function(err, data) {
     setTimeout(function() {
-      var text = 'Coffee is ready. Thanks ' + user_mention + ' for brewing it. :coffeemug:'
+      var text = 'Coffee is ready. Thanks ' + user_mention + ' for brewing it. :coffee:'
       slack.chat.postMessage({ token:SlackApiToken, channel:coffee_channel, text:text, icon_emoji:icon_emoji, username:botname}, function(err, data) {
       });
     }, twelveMins);
