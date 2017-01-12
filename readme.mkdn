@@ -3,8 +3,6 @@ This is a server that will generate [Jasonette](http://jasonette.com/) valid Jas
 
 The Apps show the faces of the slack users in the channel specified in the `.env` file. If a face is pressed, a slackbot will update the channel saying coffee is brewing, and 12 minutes later that coffee is ready. 
 
-![screenshot](screenshot.png)
-
 ## Using it
 ### Development
 You'll need node installed and npm
