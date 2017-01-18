@@ -79,7 +79,3 @@ http.createServer(app).listen(app.get('port'), function (req, res) {
       res.end();
     }
 });
-
-server.on('connection', function (soc) {
-  
-})
