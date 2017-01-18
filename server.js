@@ -73,9 +73,5 @@ app.get('/public/*', function(req, res) {
  */
 
 http.createServer(app).listen(app.get('port'), function () {
-  var ip = req.ip || req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress;
-  if (ip != '38.88.149.154') {// exit if it's a particular ip
-    res.end();
-  }
   console.log('Express server listening on port ' + app.get('port'));
 });
